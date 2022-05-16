@@ -10,8 +10,16 @@ socket.on('connect', () => {
     console.log(socket.id)
 })
 
+socket.on('opponent-found', () => {
+    console.log("Opponent Found")
+})
+
+socket.on('opponent-disconnected', () => {
+    console.log("Your opponent has left the game")
+})
+
 function joinMatch(){
-    socket.emit('join-match', roomID.value, (joined) => {
-        console.log(joined)
+    socket.emit('join-match', roomID.value, (err) => {
+      console.log("The gameID is either invalid or expired.")
     })
 }

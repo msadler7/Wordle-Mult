@@ -14,7 +14,12 @@ io.on('connection', socket => {
     socket.on('join-match', (roomID, cb) => {
         if (rooms.has(roomID)){
             socket.join(roomID)
-            cb(true)
+            console.log(`${socket.id} has joined room ${roomID}`)
+            io.to(roomID).emit('opponent-found')
+
+            socket.on('disconnect', () => {
+                socket.to(roomID).emit('opponent-disconnected')
+            })
         }
         else{
             cb(false)
