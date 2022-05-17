@@ -1,24 +1,21 @@
 import React from 'react'
-import './App.css'
+import { useState } from 'react'
+import Board from './components/Board'
+import Menu from './components/Menu'
+import './styles/App.css'
 
-function App() {
 
-    let gridItems = []
-
-    for (let i = 0; i < 30; i++) {
-        gridItems.push(
-            <div className='item'></div>
-        )
-    }
+const App = () => {
+    const [open, setOpen] = useState(true)
 
     return (
-        <div className='container'>
-            <h1 className='title'>Wordle Online</h1>
-            <div className="board">
-                {gridItems}
+        <>
+            {open ? <Menu /> : <></>}
+            <div className='container'>
+                <h1 className='title'>Wordle Online</h1>
+                <Board />
             </div>
-            <button className='play'>Play</button>
-        </div>
+        </>
     )
 }
 
