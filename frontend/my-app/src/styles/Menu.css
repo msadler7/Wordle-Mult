@@ -14,7 +14,7 @@
     justify-content: center;
 }
 
-.menu-container{
+.default-container{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -23,12 +23,17 @@
     height: 250px;
 }
 
-.menu-btn{
+.btns{
     font-size: 30px;
     border-radius: 10px;
     background-color: white;
 }
 
-.menu-btn:hover{
+.btns:hover{
     background-color: greenyellow;
+}
+
+.inputs{
+    font-size: 30px;
+    border-radius: 10px;
 }

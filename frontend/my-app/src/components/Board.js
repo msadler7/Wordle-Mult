@@ -6,7 +6,7 @@ const Board = () => {
 
     for (let i = 0; i < 30; i++) {
         gridItems.push(
-            <div className='item'></div>
+            <div key={i} className='item'></div>
         )
     }
 

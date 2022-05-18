@@ -10,7 +10,7 @@ const App = () => {
 
     return (
         <>
-            {open ? <Menu /> : <></>}
+            {open ? <Menu closeModal={setOpen}/> : <></>}
             <div className='container'>
                 <h1 className='title'>Wordle Online</h1>
                 <Board />
