@@ -25,7 +25,7 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => {
-        io.to(gameID).emit('opponent-disconnected')
+        io.to(gameID).emit('opponent_disconnected')
     })
 
 })

@@ -1,19 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const Create = ({setMenu, closeMenu, socketService}) => {
+const Create = ({setState, socketService}) => {
     const [gameID, setGameID] = useState('')
 
     const createSession = async () => {
         await socketService.connect()
         setGameID(socketService.socket.id)
         await socketService.waitForOpponent()
-        closeMenu(false)
-    }
-
-    const play = async () => {
-        closeMenu(false)
-        await socketService.waitForOpponent()
+        setState({open: false})
     }
 
     useEffect(() => {
@@ -23,9 +18,8 @@ const Create = ({setMenu, closeMenu, socketService}) => {
     return (
         <div className='menu'>
             <div className='default-container'>
-                <h2>Your gameID is: {gameID}</h2>
-                <input className='inputs' placeholder='Username' />
-                <button onClick={() => play()} className='btns'>Play</button>
+                <h2 className="gameID">Your gameID is: {gameID}</h2>
+                <h3>Waiting for opponent... </h3>
             </div>
         </div>
     )

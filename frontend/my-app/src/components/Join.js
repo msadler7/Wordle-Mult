@@ -1,19 +1,27 @@
 import React from "react";
 import { useState } from "react";
 
-const Join = ({setMenu, closeMenu, socketService}) => {
+const Join = ({ setState, socketService }) => {
     const [gameID, setGameID] = useState('')
+    const [connecting, setConnecting] = useState(false)
 
-    const joinMatch = () => {
-        socketService.join(gameID)
+    const joinMatch = async () => {
+        setConnecting(true)
+        await socketService.join(gameID)
+        setState({open: false})
     }
 
     return (
         <div className='menu'>
             <div className='default-container'>
-                <input onChange={(e) => setGameID(e.target.value)} className='inputs' placeholder='GameID' />
-                <input className='inputs' placeholder='Username' />
-                <button onClick={() => joinMatch()} className='btns'>Join</button>
+                {!connecting ?
+                    <>
+                        <input onChange={(e) => setGameID(e.target.value)} className='inputs' placeholder='GameID' />
+                        <button onClick={() => joinMatch()} className='btns'>Join</button>
+                    </>
+                    :
+                    <h2>Joining Game</h2>
+                }
             </div>
         </div>
     )
