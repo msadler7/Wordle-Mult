@@ -6,6 +6,14 @@ const Create = ({setMenu, closeMenu, socketService}) => {
 
     const createSession = async () => {
         await socketService.connect()
+        setGameID(socketService.socket.id)
+        await socketService.waitForOpponent()
+        closeMenu(false)
+    }
+
+    const play = async () => {
+        closeMenu(false)
+        await socketService.waitForOpponent()
     }
 
     useEffect(() => {
@@ -17,7 +25,7 @@ const Create = ({setMenu, closeMenu, socketService}) => {
             <div className='default-container'>
                 <h2>Your gameID is: {gameID}</h2>
                 <input className='inputs' placeholder='Username' />
-                <button className='btns'>Play</button>
+                <button onClick={() => play()} className='btns'>Play</button>
             </div>
         </div>
     )

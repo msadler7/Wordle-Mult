@@ -5,7 +5,7 @@ const Join = ({setMenu, closeMenu, socketService}) => {
     const [gameID, setGameID] = useState('')
 
     const joinMatch = () => {
-
+        socketService.join(gameID)
     }
 
     return (
