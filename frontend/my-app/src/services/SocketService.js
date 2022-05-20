@@ -6,9 +6,8 @@ class SocketService {
     socket = null
     gameID = ''
 
-    constructor(url, startGame) {
+    constructor(url) {
         this.url = url
-        this.startGame = startGame
     }
 
     async connect() {
@@ -46,7 +45,6 @@ class SocketService {
             this.socket.on('opponent_found', (gameID) => {
                 this.gameID = gameID
                 console.log('Opponent Found!!')
-                this.startGame(gameID)
 
                 this.socket.on('opponent_disconnected', () => {
                     console.log('opponent left')

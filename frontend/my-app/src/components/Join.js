@@ -1,14 +1,17 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { SocketContext } from "../App";
 
-const Join = ({ setState, socketService }) => {
+const Join = ({startGame, setMenuOpen }) => {
     const [gameID, setGameID] = useState('')
     const [connecting, setConnecting] = useState(false)
+    const [socketService,] = useContext(SocketContext)
 
     const joinMatch = async () => {
         setConnecting(true)
         await socketService.join(gameID)
-        setState({open: false})
+        setMenuOpen(false)
+        startGame()
     }
 
     return (

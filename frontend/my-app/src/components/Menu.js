@@ -5,18 +5,18 @@ import Create from './Create'
 import Join from './Join'
 import '../styles/Menu.css'
 
-const Menu = ({ setState, socketService }) => {
+const Menu = ({ startGame, setMenuOpen }) => {
     const [menu, setMenu] = useState('default')
     let screen = null
 
     if (menu === 'default') {
-        screen = <Default setMenu={setMenu} setState={setState} />
+        screen = <Default startGame={startGame} setMenuOpen={setMenuOpen} setMenu={setMenu}/>
     }
     else if (menu === 'create') {
-        screen = <Create socketService={socketService} setMenu={setMenu} setState={setState} />
+        screen = <Create startGame={startGame} setMenuOpen={setMenuOpen}/>
     }
     else if (menu === 'join') {
-        screen = <Join socketService={socketService} setMenu={setMenu} setState={setState} />
+        screen = <Join startGame={startGame} setMenuOpen={setMenuOpen}/>
     }
 
     return (

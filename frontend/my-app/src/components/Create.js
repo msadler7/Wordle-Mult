@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { useState } from "react";
+import { SocketContext } from "../App";
 
-const Create = ({setState, socketService}) => {
+const Create = ({ startGame ,setMenuOpen}) => {
     const [gameID, setGameID] = useState('')
+    const [socketService,] = useContext(SocketContext)
 
     const createSession = async () => {
         await socketService.connect()
         setGameID(socketService.socket.id)
         await socketService.waitForOpponent()
-        setState({open: false})
+        setMenuOpen(false)
+        startGame()
     }
 
     useEffect(() => {

@@ -1,45 +1,16 @@
-import React from 'react'
-import Board from './components/Board'
-import Menu from './components/Menu'
-import GameService from './services/GameService'
+import React, { useState, createContext } from 'react'
+import Landing from './Landing'
 import SocketService from './services/SocketService'
 
-import './styles/App.css'
+const SocketContext = createContext(null)
 
-class App extends React.Component {
-
-    constructor() {
-        super()
-        this.state = {
-            open: true,
-            socket: new SocketService('http://localhost:3000', this.startGame.bind(this)),
-            boardState: [],
-            game: null,
-        }
-    }
-
-    startGame(word){
-        this.setState({game: new GameService(word, this.setState.bind(this))}, () => {
-            document.addEventListener('keydown', this.state.game.handle.bind(this.state.game))
-        })
-    }
-
-    setBoardState(){
-        console.log('hello')
-    }
-
-    render() {
-
-        return (
-            <>
-                {this.state.open ? <Menu socketService={this.state.socket} setState={this.setState.bind(this)} /> : <></>}
-                <div className='container'>
-                    <h1 className='title'>Wordle Online</h1>
-                    <Board boardState={this.state.boardState} />
-                </div>
-            </>
-        )
-    }
+const App = () => {
+    
+    return (
+        <SocketContext.Provider value={useState(new SocketService('http://localhost:3000'))}>
+            <Landing/>
+        </SocketContext.Provider>
+    )
 }
 
-export default App
+export {App, SocketContext}

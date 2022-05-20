@@ -1,34 +1,29 @@
 class GameService {
-    turn = 1
-    guess = ''
+    choice = ''
     choices = []
 
-    constructor(word, changeState) {
+    constructor(word, setBoard) {
         this.word = word
-        this.changeState = changeState
+        this.setBoard = setBoard
     }
 
-    handle(e) {
+    handleKeyDown(e) {
 
-        if (e.key == 'Backspace'){
-            this.guess = this.guess.substring(0, this.guess.length - 1)
-            this.choices[this.turn] = this.guess
-            this.changeState({boardState: this.choices})
-            return
-        }
-
-        if (this.guess.length < 5) {
-            this.guess += e.key
-            this.choices[this.turn] = this.guess
-            this.changeState({boardState: this.choices})
-            return
-        }
-
-        if (this.guess.length == 5){
-            if (e.key = "Enter"){
-                this.turn += 1
-                this.choices.push(this.guess)
-            }
+        switch(e.key){
+            case ('Backspace'):
+                this.choice = this.choice.substring(0, this.choice.length - 1)
+                return
+            case ('Enter'):
+                if (this.choice.length === 5){
+                    this.choices.push(this.choice)
+                    this.setBoard([...this.choices])
+                    this.choice = ''
+                }
+                return
+            default:
+                if (e.key.match(/[A-Za-z]/) && this.choice.length < 5){
+                    this.choice += e.key
+                }
         }
     }
 
