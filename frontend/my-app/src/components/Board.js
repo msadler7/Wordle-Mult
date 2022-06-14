@@ -10,10 +10,19 @@ const Board = ({ choices }) => {
     for (let i = 0; i < ROWS; i++) {
         for (let j = 0; j < COLUMNS; j++) {
             let element
-            if (i < choices.length) {
+            if (5 * i + j < choices.length) {
+                let obj = choices[5 * i + j]
+                let className = 'item'
+
+                if (obj.showColor) {
+                    if (obj.code === 2) { className = 'correct-item' }
+                    else if (obj.code === 1) { className = 'close-item' }
+                    else { className = 'incorrect-item' }
+                }
+
                 element = (
-                    <div key={`${i},${j}`} className='item'>
-                        <h1>{choices[i][j]}</h1>
+                    <div key={`${i},${j}`} className={className}>
+                        <h1>{choices[5 * i + j].token}</h1>
                     </div>
                 )
             }

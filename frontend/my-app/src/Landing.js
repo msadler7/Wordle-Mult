@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, memo, useContext } from "react"
 import Board from './components/Board'
 import Menu from './components/Menu'
 import GameService from "./services/GameService"
+import { SocketContext } from "./App";
 import './styles/App.css'
 
+const MemoedBoard = memo(Board)
 
 const Landing = () => {
     const [menuOpen, setMenuOpen] = useState(true)
     const [gameController, setGameInstance] = useState(null)
     const [choices, setChoices] = useState([])
+    const [socketService,] = useContext(SocketContext)
 
     useEffect(() => {
         const handler = (e) => {
@@ -22,7 +25,8 @@ const Landing = () => {
     }, [gameController])
 
     const startGame = () => {
-        setGameInstance(new GameService('test', setChoices))
+        setGameInstance(new GameService(socketService.word, setChoices, socketService))
+        console.log(socketService.word)
     }
 
     return (
@@ -30,9 +34,7 @@ const Landing = () => {
             {menuOpen ? <Menu startGame={startGame} setMenuOpen={setMenuOpen} /> : <></>}
             <div className='container'>
                 <h1 className='title'>Wordle Online</h1>
-                <Board choices={choices}/>
-                {/* <button onClick={() => { console.log(choices) }}>Click Here</button> */}
-                {/* <button onClick={() => {document.addEventListener('keydown', test.bind(count))}}>Create Listener</button> */}
+                <MemoedBoard choices={choices}/>
             </div>
         </>
     )

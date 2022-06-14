@@ -11,6 +11,7 @@ const Create = ({ startGame ,setMenuOpen}) => {
         setGameID(socketService.socket.id)
         await socketService.waitForOpponent()
         setMenuOpen(false)
+        socketService.listen()
         startGame()
     }
 

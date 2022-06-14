@@ -11,6 +11,7 @@ const Join = ({startGame, setMenuOpen }) => {
         setConnecting(true)
         await socketService.join(gameID)
         setMenuOpen(false)
+        socketService.listen()
         startGame()
     }
 

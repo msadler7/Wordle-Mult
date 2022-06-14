@@ -4,7 +4,7 @@ class SocketService {
 
     url = ''
     socket = null
-    gameID = ''
+    word = ''
 
     constructor(url) {
         this.url = url
@@ -42,16 +42,25 @@ class SocketService {
 
     async waitForOpponent() {
         return new Promise((resolve) => {
-            this.socket.on('opponent_found', (gameID) => {
-                this.gameID = gameID
+            this.socket.on('opponent_found', (word) => {
+                this.word = word
                 console.log('Opponent Found!!')
-
-                this.socket.on('opponent_disconnected', () => {
-                    console.log('opponent left')
-                })
-
                 resolve()
             })
+        })
+    }
+
+    sendWinMessage() {
+        this.socket.emit('game_won');
+    }
+
+    listen() {
+        this.socket.on('game_won', () => {
+            console.log("Your oppponent has won the game")
+        })
+
+        this.socket.on('opponent_disconnected', () => {
+            console.log('opponent left')
         })
     }
 }

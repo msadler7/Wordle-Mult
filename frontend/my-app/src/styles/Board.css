@@ -1,4 +1,4 @@
-.board{
+.board {
     width: 65%;
     justify-content: center;
     grid-gap: 15px;
@@ -6,11 +6,35 @@
     display: grid;
     grid-template-rows: repeat(6, 50px);
     grid-template-columns: repeat(5, 50px);
-  }
-  
-  .item{
-      border: 2px solid black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+}
+
+.item {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.correct-item {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+}
+
+.close-item{
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;
+}
+
+.incorrect-item{
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+}
